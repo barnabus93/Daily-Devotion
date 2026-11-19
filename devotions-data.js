@@ -7,6 +7,8 @@
  * and LORD in capitals where the NIV uses small caps). `ref` is "chapter:verse".
  * family.keyVerses lists the refs (from `passage`) shown on the Action Read card.
  * family.listenFor lists the word forms the Listening Word counter looks for.
+ * personal.reality has a `dad` and a `mom` version; the app shows the one picked in Settings.
+ * Family cards are written for young kids (about 4–8).
  *
  * Scripture quotations taken from The Holy Bible, New International Version® NIV®.
  * Copyright © 1973, 1978, 1984, 2011 by Biblica, Inc.™ Used by permission. All rights reserved worldwide.
@@ -29,7 +31,10 @@ const devotionsData = [
       context: "Paul is recounting what he said to Peter at Antioch (2:11–14). Peter had been eating with Gentile believers, then pulled back from their table when the circumcision group arrived, afraid of what they would think. Paul confronted him publicly, because this was not a matter of manners. It was the gospel itself. If Gentiles must take on the law to sit at the table, then Christ is not enough. These verses are the heart of Paul’s answer: no one is justified by works of the law, only by faith in Christ.",
       grace: "Verse 20 gets personal: “the Son of God, who loved me and gave himself for me.” What does it tell you about God that He declares righteous people who could never make themselves righteous? Where is His grace doing what your own effort never could?",
       warning: "Peter, an apostle who had walked with Jesus, slid into rule-keeping out of fear of man (2:12). Where do you see pride or performance here: adding requirements to the gospel, measuring yourself or others by visible standards, or pulling away from believers who don’t fit your circle?",
-      reality: "Your boys will learn what earns acceptance from how you respond to them. Does your home run on performance, with love given and withdrawn, or on grace that still calls them to obey? With your wife: are you quietly keeping score?",
+      reality: {
+        dad: "Your kids will learn what earns acceptance from how you respond to them. Does your home run on performance, with love given and withdrawn, or on grace that still calls them to obey? Where are you living for the approval of other men instead of Christ? With your wife: are you quietly keeping score?",
+        mom: "Your kids will learn what earns acceptance from how you respond to them. Does your home run on performance, with love given and withdrawn, or on grace that still calls them to obey? Where are you measuring yourself against other moms, or measuring your kids against theirs? With your husband: are you quietly keeping score?"
+      },
       prayerStarter: "Lord Jesus, You loved me and gave Yourself for me. I stop trying to earn what You have already given…"
     },
     family: {
@@ -66,7 +71,10 @@ const devotionsData = [
       context: "Peter writes to believers scattered across Asia Minor. He calls them “exiles,” people living under suspicion and mistreatment because of their faith. He has just described their living hope in Christ (1:3–12), and now he draws the “therefore”: prepare your minds, fix your hope on grace still to come, and be holy like the One who called you. He closes the section by quoting Isaiah 40. People fade like grass, but the word of the Lord endures, and that enduring word is the gospel that was preached to them.",
       grace: "Hope is set “on the grace to be brought to you” (v. 13). Even holiness runs on grace, including grace you haven’t received yet. What does it reveal about God that He calls you to be holy because He is holy, and that His word outlasts everything human?",
       warning: "“Do not conform to the evil desires you had when you lived in ignorance” (v. 14). Which old patterns are still pulling at you? Where are you treating Scripture as optional advice instead of the enduring word of the Lord, or drifting toward voices that tell you what you want to hear?",
-      reality: "“Minds that are alert and fully sober” (v. 13). What dulls your mind at the end of the day: the phone, screens, entertainment? What does that cost your wife and boys? If God’s word endures forever, how much of it are your sons actually hearing from you?",
+      reality: {
+        dad: "“Minds that are alert and fully sober” (v. 13). What dulls your mind at the end of the day: the phone, screens, entertainment? What does that cost your wife and kids? If God’s word endures forever, how much of it are your children actually hearing from you?",
+        mom: "“Minds that are alert and fully sober” (v. 13). In the constant noise of a day with kids, what dulls or scatters your mind: the phone, scrolling, worry? What would it look like to set your hope on grace instead of on getting everything done? If God’s word endures forever, how much of it are your children hearing from you, and how much is your own soul getting?"
+      },
       prayerStarter: "Holy Father, You called me out of ignorance into Your light. Make me holy in all I do…"
     },
     family: {
@@ -100,7 +108,10 @@ const devotionsData = [
       context: "Paul writes to a church he had never visited. It was being pressured by teaching that added spiritual “extras” to Christ (2:8, 16–23). Just before this passage he exalts Christ as Creator, sustainer and head of the church, the one through whom God reconciled all things “by making peace through his blood” (1:15–20). Now he applies it to them: that reconciliation includes you.",
       grace: "Once alienated, enemies in mind, evil in behavior. “But now he has reconciled you.” God took the initiative through Christ’s physical death, and He will present you “holy… without blemish and free from accusation.” What does it reveal about God that He makes peace with His enemies at His own cost?",
       warning: "“If you continue in your faith… and do not move from the hope held out in the gospel” (v. 23). This is not earning salvation. Continuing is how real faith shows itself. What could move you off the hope of the gospel: a new spiritual add-on, slow drift, prayerlessness, isolating yourself from the church?",
-      reality: "The gospel is reconciliation, and your home should look like it. Is there tension with your wife that you’re waiting for her to fix first? Who in your local church helps keep you “established and firm,” and whom are you helping?",
+      reality: {
+        dad: "The gospel is reconciliation, and your home should look like it. Is there tension with your wife that you’re waiting for her to fix first? Is there a child you need to go to after a harsh word? Who in your local church helps keep you “established and firm,” and whom are you helping?",
+        mom: "The gospel is reconciliation, and your home should look like it. Is there tension with your husband that you’re waiting for him to fix first? Is there a child you need to go to after a sharp word? Who in your local church, perhaps another mom or an older woman (Titus 2:3–5), helps keep you “established and firm,” and whom are you helping?"
+      },
       prayerStarter: "Father, I was far from You and hostile in my mind, but You made peace with me through Christ…"
     },
     family: {
@@ -134,7 +145,10 @@ const devotionsData = [
       context: "Paul planted the church in Thessalonica and had to flee within weeks because of persecution (Acts 17:1–10). He writes to a young church still suffering for their faith (1:6; 2:14; 3:3–4). These three short commands come in a closing list of instructions for life together. They aren’t advice for easy seasons. Paul gave them to believers under pressure.",
       grace: "“This is God’s will for you in Christ Jesus.” We often agonize over God’s will for big decisions, and here it is stated plainly. What does it reveal about God that He wants His people joyful, in constant conversation with Him, and grateful? What grace makes rejoicing possible when circumstances aren’t good?",
       warning: "Paul says give thanks “in” all circumstances, not “for” all circumstances. Where have grumbling, entitlement or prayerless self-reliance crept in? What does a complaining spirit say about what you believe God owes you?",
-      reality: "Your boys learn what a man does under stress by watching you. When you walk in the door after a hard day, what do they see: complaining or gratitude, anxiety or prayer? What would “pray continually” look like in your actual day: in the truck, at your desk, before you discipline?",
+      reality: {
+        dad: "Your kids learn what a man does under stress by watching you. When you walk in the door after a hard day, what do they see: complaining or gratitude, anxiety or prayer? What would “pray continually” look like in your actual day: on the commute, at work, before you discipline?",
+        mom: "Your kids learn what to do with stress by watching you. In the middle of the meltdowns, the mess and the long day, what do they see and hear: complaining or gratitude, anxiety or prayer? What would “pray continually” look like in your actual day: in the car, at work or at home, before you discipline?"
+      },
       prayerStarter: "Father, I rejoice in You. In this circumstance I choose to give thanks for…"
     },
     family: {
@@ -174,7 +188,10 @@ const devotionsData = [
       context: "Some believers in Thessalonica had stopped working, possibly unsettled by confusion about Christ’s return (2:1–2). They were living off the generosity of others and meddling in everyone’s business. Paul had modeled the opposite: he worked “night and day” to support himself, even though he had a right to be supported. Here he tells the church to deal with idleness. Its purpose is to restore, not to shame (3:14–15: “do not regard them as an enemy, but warn them as you would a fellow believer”).",
       grace: "Even this hard command comes “in the name of the Lord Jesus Christ.” Work is not a curse to escape. It reflects a working God (Genesis 2:15) and loves your neighbor by not being a burden. How has grace freed you to work for Christ rather than for approval, status or fear?",
       warning: "Notice the wordplay: “They are not busy; they are busybodies.” Idleness is not just doing nothing. It fills the gap with meddling. Where is there idleness in you: dodging hard responsibilities, going passive at home, or staying busy in ways that look productive but avoid what matters? (Paul is addressing the unwilling, not the unable.)",
-      reality: "Many men work hard at their jobs and go passive at home. “Never tire of doing what is good” covers dishes, bath time, a 3 a.m. feeding, and leading devotions when you’re worn out. Where is your wife carrying a load you’ve stepped back from? What does your 5-year-old learn about work from how you talk about yours?",
+      reality: {
+        dad: "It’s easy to work hard at a job and go passive at home. “Never tire of doing what is good” covers dishes, bath time, a 3 a.m. feeding, and leading devotions when you’re worn out. Where is your wife carrying a load you’ve stepped back from? What do your kids learn about work from how you talk about yours?",
+        mom: "“Never tire of doing what is good” is written for people who are tired. Much of a mom’s work is unseen and never finished: meals, laundry, a 3 a.m. feeding, the hundredth reminder. Are you serving out of love for Christ, or out of resentment or a need to be noticed? Where do you need to ask your husband for help instead of carrying it silently? What do your kids learn about work from how you talk about yours?"
+      },
       prayerStarter: "Lord Jesus, I don’t want to be idle or a burden. Give me strength to keep doing good when I’m tired…"
     },
     family: {
@@ -209,7 +226,10 @@ const devotionsData = [
       context: "Moses is preaching to Israel on the plains of Moab, just before they enter the promised land. Right before this he commands them not to intermarry or make covenants with the idolatrous nations (7:1–5). Why should they be different? Because of who they are: a people holy to the LORD, chosen not for size or merit but because He loved them and kept His oath to Abraham, Isaac and Jacob. Peter applies the same language to the church: “a chosen people… God’s special possession” (1 Peter 2:9).",
       grace: "Verses 7–8 are almost circular on purpose: the LORD loved you because He loved you. His love is not a response to your worthiness. And He is “the faithful God, keeping his covenant of love to a thousand generations.” What does it mean that God’s love is rooted in His own character and promises, not your performance?",
       warning: "Israel’s danger was to read being chosen as proof of their superiority. Verse 7 shuts that down: “you were the fewest of all peoples.” Where do you take credit for blessings God gave? Where has spiritual pride crept in, so that you look down on people who don’t yet know Him?",
-      reality: "“A thousand generations of those who love him and keep his commandments.” Your faithfulness is one of the ways faith gets handed down, though it can’t save your sons for them. What are you handing down? Picture your boys at your age. What do you want them to remember about how their father loved God and their mother?",
+      reality: {
+        dad: "“A thousand generations of those who love him and keep his commandments.” Your faithfulness is one of the ways faith gets handed down, though it can’t save your children for them. What are you handing down? Picture your kids at your age. What do you want them to remember about how their father loved God and their mother?",
+        mom: "“A thousand generations of those who love him and keep his commandments.” Timothy’s faith lived first in his grandmother Lois and his mother Eunice (2 Timothy 1:5). Your faithfulness is one of the ways faith gets handed down, though it can’t save your children for them. What are you handing down? Picture your kids at your age. What do you want them to remember about how their mother loved God and their father?"
+      },
       prayerStarter: "Faithful God, You chose me not because I was impressive, but because You love me…"
     },
     family: {
@@ -245,7 +265,10 @@ const devotionsData = [
       context: "Lamentations is five poems mourning Jerusalem’s destruction by Babylon in 586 BC, traditionally attributed to Jeremiah. In chapter 1 the city speaks as a grieving woman, and her lament is honest: “The LORD is righteous, yet I rebelled.” The judgment was not random. It was the consequence the covenant had warned about for generations. Then, at the very center of the book (3:21–24), the poet calls to mind a hope that holds even in the ruins.",
       grace: "“Because of the LORD’s great love we are not consumed.” The word for love is hesed, God’s steadfast covenant love, the same “covenant of love” from Deuteronomy 7:9 yesterday. His compassions never fail; they are new every morning. What does it mean that God’s faithfulness is greater than our rebellion, and that the poet finds this while still sitting in the rubble?",
       warning: "“I have been most rebellious” (1:20). Jerusalem’s ruin came after long, stubborn sin and ignored warnings. Not every hardship is punishment (see John 9:1–3). But ask honestly: where is unrepented sin costing you, or the people around you? Are there warnings you’ve been brushing off?",
-      reality: "“New every morning.” You get a fresh start each day as a husband and father. Yesterday still matters, but God’s mercy is renewed. Is there a failure from this week (a lost temper, distance, neglect) that you need to confess to God, and to your wife or son, and then walk forward in mercy instead of shame?",
+      reality: {
+        dad: "“New every morning.” You get a fresh start each day as a husband and father. Yesterday still matters, but God’s mercy is renewed. Is there a failure from this week (a lost temper, distance, neglect) that you need to confess to God, and to your wife or a child, and then walk forward in mercy instead of shame?",
+        mom: "“New every morning.” You get a fresh start each day as a wife and mother. Yesterday still matters, but God’s mercy is renewed. Is there a failure from this week (a sharp tone, impatience, comparison, shutting down) that you need to confess to God, and to your husband or a child, and then walk forward in mercy instead of mom guilt?"
+      },
       prayerStarter: "LORD, You are righteous, and I have rebelled. Thank You that Your mercies are new this morning…"
     },
     family: {

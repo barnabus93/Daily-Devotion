@@ -20,7 +20,15 @@
   const fmtTime = iso => new Date(iso).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
 
   // ───────── State ─────────
-  const defaults = () => ({ theme: null, tab: "study", startDate: todayKey(), childName: "", entries: {} });
+  const defaults = () => ({ theme: null, tab: "study", role: null, startDate: todayKey(), childName: "", entries: {} });
+
+  // Wording that changes with the Dad / Mom setting (devotion text lives in devotions-data.js)
+  const ROLE_TEXT = {
+    dad: { label: "Dad", realitySub: "Fatherhood & Leadership", realityHead: "As a husband and father today", mdReality: "As a husband & father" },
+    mom: { label: "Mom", realitySub: "Motherhood & Leadership", realityHead: "As a wife and mother today", mdReality: "As a wife & mother" }
+  };
+  const role = () => (state.role === "mom" ? "mom" : "dad");
+  const realityText = p => (typeof p.reality === "string" ? p.reality : (p.reality[role()] || p.reality.dad));
 
   function sanitize(raw) {
     const d = defaults();
@@ -39,8 +47,9 @@
     return {
       theme: raw.theme === "dark" || raw.theme === "light" ? raw.theme : null,
       tab: raw.tab === "family" ? "family" : "study",
+      role: raw.role === "dad" || raw.role === "mom" ? raw.role : null,
       startDate: isKey(raw.startDate) ? raw.startDate : d.startDate,
-      childName: typeof raw.childName === "string" ? raw.childName.slice(0, 30) : "",
+      childName: typeof raw.childName === "string" ? raw.childName.slice(0, 60) : "",
       entries
     };
   }
@@ -198,8 +207,8 @@
 
       el("section", { class: "step" }, [
         el("h3", { class: "step-title" }, [el("span", { class: "step-num" }, "3"), "The Reality Check"]),
-        el("div", { class: "step-sub" }, "Fatherhood & Leadership"),
-        el("div", { class: "prompt-card" }, [el("h4", {}, "As a husband and father today"), el("p", {}, p.reality)]),
+        el("div", { class: "step-sub" }, ROLE_TEXT[role()].realitySub),
+        el("div", { class: "prompt-card" }, [el("h4", {}, ROLE_TEXT[role()].realityHead), el("p", {}, realityText(p))]),
         ...field("study", "reality", { placeholder: "Be honest and specific." }),
         ...field("study", "action", { label: "One concrete action or mindset shift today", short: true, placeholder: "e.g. Put the phone away from dinner to bedtime." })
       ]),
@@ -315,7 +324,7 @@
               if (navigator.vibrate) navigator.vibrate(15);
               if (ui.revealed) msg.textContent = revealText(n, expected, f.listeningWord);
             }
-          }, [countEl, el("small", {}, name ? name.toUpperCase() + " HEARD IT!" : "I HEARD IT!")]),
+          }, [countEl, el("small", {}, "I HEARD IT!")]),
           el("div", { class: "tap-tools" }, [
             el("button", { type: "button", class: "btn mini", onclick: () => { ui.revealed = !ui.revealed; render(); } }, ui.revealed ? "Hide answer" : "How many were there?"),
             el("button", { type: "button", class: "btn mini", onclick: () => { setFamily("taps", 0); ui.revealed = false; render(); } }, "Reset count")
@@ -337,7 +346,7 @@
     return [
       el("div", { class: "card-label" }, "3 · Two Table Questions"),
       el("div", { class: "qcard" }, [
-        el("div", { class: "who" }, name ? "For " + name : "For our 5-year-old"),
+        el("div", { class: "who" }, name ? "For " + name : "For the kids"),
         el("p", {}, f.question1),
         f.question1Hint ? el("details", {}, [el("summary", {}, "Answer for Mom & Dad"), f.question1Hint]) : null
       ]),
@@ -359,7 +368,7 @@
 
     return [
       el("div", { class: "card-label" }, "4 · Repeat-After-Me Prayer"),
-      el("p", { class: "prayer-how" }, "Read a line, " + (name || "he") + " repeats it. Tap a line, or press Space, to move to the next one."),
+      el("p", { class: "prayer-how" }, "Read a line, then everyone repeats it. Tap a line, or press Space, to move to the next one."),
       lines,
       el("div", { class: "gratitude" }, [
         el("strong", {}, "🙏 Gratitude check: Name one thing you are thankful to God for today."),
@@ -492,7 +501,7 @@
       sec("In my own words", s.summary);
       sec("God’s character & grace", s.grace);
       sec("Human nature & warning", s.warning);
-      sec("Fatherhood & leadership", s.reality);
+      sec(ROLE_TEXT[role()].mdReality, s.reality);
       sec("One concrete action today", s.action);
       sec("Prayer", s.prayer);
       const status = [];
@@ -568,10 +577,24 @@
   $("archiveBtn").addEventListener("click", () => { renderArchive(); $("archiveDialog").showModal(); });
   $("settingsBtn").addEventListener("click", () => {
     $("childName").value = state.childName;
+    syncRoleButtons();
     $("startDate").value = state.startDate;
     $("settingsDialog").showModal();
   });
-  $("childName").addEventListener("input", e => { state.childName = e.target.value.slice(0, 30); save(); render(); });
+  $("childName").addEventListener("input", e => { state.childName = e.target.value.slice(0, 60); save(); render(); });
+
+  // Dad / Mom toggle (Settings) and first-run welcome
+  function setRole(r) { state.role = r; save(); syncRoleButtons(); render(); }
+  function syncRoleButtons() {
+    document.querySelectorAll("[data-role]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.role === role())));
+  }
+  document.querySelectorAll("#settingsDialog [data-role]").forEach(b => b.addEventListener("click", () => { setRole(b.dataset.role); flash(ROLE_TEXT[role()].label + " mode on."); }));
+  document.querySelectorAll("#welcomeDialog [data-role]").forEach(b => b.addEventListener("click", () => {
+    state.childName = $("welcomeKids").value.trim().slice(0, 60);
+    setRole(b.dataset.role);
+    $("welcomeDialog").close();
+  }));
+  $("welcomeDialog").addEventListener("cancel", e => e.preventDefault()); // a choice is needed once
   $("startDate").addEventListener("change", e => { if (isKey(e.target.value)) { state.startDate = e.target.value; save(); render(); flash("Plan start date updated."); } });
 
   $("exportMd").addEventListener("click", () => { download("devotion-journal-" + todayKey() + ".md", buildMarkdown(), "text/markdown"); flash("Markdown downloaded."); });
@@ -620,4 +643,5 @@
   });
 
   render();
+  if (!state.role) $("welcomeDialog").showModal();
 })();

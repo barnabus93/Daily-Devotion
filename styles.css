@@ -234,6 +234,10 @@ dialog h3 { font-size: .85em; text-transform: uppercase; letter-spacing: .06em; 
 .field { display: block; margin: .8em 0; font-weight: 600; }
 .field input { margin-top: .3em; font-weight: 400; }
 .row { display: flex; gap: 8px; flex-wrap: wrap; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: var(--surface-2); border-radius: 12px; padding: 4px; margin: .4em 0 .3em; }
+.seg button { border: 0; background: transparent; border-radius: 9px; padding: .55em; font-weight: 600; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.seg-big button { padding: .9em; font-size: 1.05em; color: var(--ink); background: var(--surface); }
 .status { min-height: 1.2em; color: var(--accent); font-weight: 600; }
 .archive-item {
   display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 10px; text-align: left;

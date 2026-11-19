@@ -55,9 +55,30 @@
     <div id="archiveList"></div>
   </dialog>
 
+  <dialog id="welcomeDialog" aria-labelledby="welcomeTitle">
+    <div class="dialog-head"><h2 id="welcomeTitle">Welcome</h2></div>
+    <p><strong>My Study</strong> is a daily devotional just for you. <strong>Family Table</strong> walks your family through the same passage in about 10–15 minutes.</p>
+    <p class="muted small">Everything you write stays private, in this browser on this device.</p>
+    <label class="field">Kids' names <input type="text" id="welcomeKids" maxlength="60" autocomplete="off" placeholder="Optional, e.g. Eli & Sam"></label>
+    <div class="field">Who's using this devotional?
+      <div class="seg seg-big" role="group" aria-label="Devotional for">
+        <button type="button" data-role="dad">👨 I'm a Dad</button>
+        <button type="button" data-role="mom">👩 I'm a Mom</button>
+      </div>
+      <span class="muted small">You can change this anytime in ⚙️ Settings.</span>
+    </div>
+  </dialog>
+
   <dialog id="settingsDialog" aria-labelledby="settingsTitle">
     <div class="dialog-head"><h2 id="settingsTitle">Settings &amp; Backup</h2><button type="button" class="icon-btn" data-close aria-label="Close">✕</button></div>
-    <label class="field">Your 5-year-old's name <input type="text" id="childName" maxlength="30" autocomplete="off" placeholder="Optional"></label>
+    <div class="field">Devotional for
+      <div class="seg" role="group" aria-label="Devotional for">
+        <button type="button" data-role="dad">👨 Dad</button>
+        <button type="button" data-role="mom">👩 Mom</button>
+      </div>
+      <span class="muted small">Changes the wording of My Study's Reality Check. Your journal entries stay the same.</span>
+    </div>
+    <label class="field">Kids' names <input type="text" id="childName" maxlength="60" autocomplete="off" placeholder="Optional, e.g. Eli & Sam"></label>
     <label class="field">Plan start date (day 1 of the plan) <input type="date" id="startDate"></label>
     <p class="muted small">The app moves through the plan one entry per day from this date and starts over when it reaches the end. Days you've already journaled keep their passage.</p>
 

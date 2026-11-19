@@ -2,30 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Daily Devotion</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="top">
-    <h1>Daily Devotion</h1>
-    <div class="toggle" role="group" aria-label="Devotional mode">
-      <button type="button" data-mode="personal">Personal</button>
-      <button type="button" data-mode="family">Family</button>
-    </div>
-  </header>
-
-  <nav class="daynav" aria-label="Day navigation">
-    <button type="button" id="prev" aria-label="Previous day">&larr;</button>
-    <div class="daylabel">
-      <div id="dayTitle"></div>
-      <div id="weekTitle" class="muted"></div>
-    </div>
-    <button type="button" id="next" aria-label="Next day">&rarr;</button>
-  </nav>
-  <div id="dots" class="dots" aria-label="Plan progress"></div>
-
-  <main id="devotion" class="card"></main>
+  <div class="app">
+    <header class="top">
+      <h1>Daily Devotion</h1>
+      <nav class="daynav" aria-label="Day navigation">
+        <button type="button" id="prev" class="icon-btn" aria-label="Previous day">&larr;</button>
+        <div class="daylabel">
+          <div id="dayTitle"></div>
+          <div id="weekTitle" class="muted"></div>
+        </div>
+        <button type="button" id="next" class="icon-btn" aria-label="Next day">&rarr;</button>
+      </nav>
+      <div class="controls">
+        <div class="toggle" role="group" aria-label="Devotional mode">
+          <button type="button" data-mode="personal">Personal</button>
+          <button type="button" data-mode="family">Family</button>
+        </div>
+        <button type="button" id="fullscreen" class="icon-btn" aria-label="Full screen" title="Full screen">&#x26F6;</button>
+      </div>
+    </header>
+    <div id="dots" class="dots" aria-label="Plan progress"></div>
+    <main id="devotion"></main>
+  </div>
 
   <footer class="settings">
     <details>
@@ -35,6 +38,9 @@
           <option>ESV</option><option>NIV</option><option>NLT</option>
           <option>CSB</option><option>NKJV</option><option>NIrV</option><option>ICB</option>
         </select>
+      </label>
+      <label>Child's name (for family questions)
+        <input type="text" id="childName" maxlength="30" autocomplete="off">
       </label>
       <p class="muted">Everything is saved only in this browser. Clearing site data erases it, and it does not sync between devices. Export a backup now and then.</p>
       <div class="row">
@@ -46,6 +52,7 @@
   </footer>
 
   <script src="content.js"></script>
+  <script src="family.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

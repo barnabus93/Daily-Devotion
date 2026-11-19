@@ -27,6 +27,18 @@
     dad: { label: "Dad", realitySub: "Fatherhood & Leadership", realityHead: "As a husband and father today", mdReality: "As a husband & father" },
     mom: { label: "Mom", realitySub: "Motherhood & Leadership", realityHead: "As a wife and mother today", mdReality: "As a wife & mother" }
   };
+  // Kids' names: a comma-separated list, e.g. "Ava, Ben, Cole"
+  const MAX_NAMES = 120;
+  function parseKids(str) {
+    const seen = new Set();
+    return String(str || "").split(",").map(n => n.trim().replace(/\s+/g, " "))
+      .filter(n => n && !seen.has(n.toLowerCase()) && seen.add(n.toLowerCase())).slice(0, 12);
+  }
+  const normalizeKids = str => parseKids(str).join(", ");
+  function kidsPhrase() {
+    const k = parseKids(state.childName);
+    return k.length <= 1 ? (k[0] || "") : k.slice(0, -1).join(", ") + " & " + k[k.length - 1];
+  }
   const role = () => (state.role === "mom" ? "mom" : "dad");
   const realityText = p => (typeof p.reality === "string" ? p.reality : (p.reality[role()] || p.reality.dad));
 
@@ -49,7 +61,7 @@
       tab: raw.tab === "family" ? "family" : "study",
       role: raw.role === "dad" || raw.role === "mom" ? raw.role : null,
       startDate: isKey(raw.startDate) ? raw.startDate : d.startDate,
-      childName: typeof raw.childName === "string" ? raw.childName.slice(0, 60) : "",
+      childName: typeof raw.childName === "string" ? normalizeKids(raw.childName.slice(0, MAX_NAMES)) : "",
       entries
     };
   }
@@ -296,7 +308,6 @@
     const re = listenRegex(f);
     const taps = fam().taps || 0;
     const expected = expectedTaps(d);
-    const name = state.childName.trim();
 
     const countEl = el("span", { id: "tapCount" }, String(taps));
     const msg = el("div", { class: "reveal-msg", "aria-live": "polite" },
@@ -342,7 +353,7 @@
 
   function cardQuestions(d) {
     const f = d.family;
-    const name = state.childName.trim();
+    const name = kidsPhrase();
     return [
       el("div", { class: "card-label" }, "3 · Two Table Questions"),
       el("div", { class: "qcard" }, [
@@ -359,7 +370,6 @@
 
   function cardPrayer(d) {
     const f = d.family;
-    const name = state.childName.trim();
     const done = fam().completedAt;
     const lines = el("ol", { class: "prayer-lines" }, f.prayer.map((line, i) => el("li", {}, el("button", {
       type: "button", class: i === ui.prayerLine ? "current" : "",
@@ -581,7 +591,8 @@
     $("startDate").value = state.startDate;
     $("settingsDialog").showModal();
   });
-  $("childName").addEventListener("input", e => { state.childName = e.target.value.slice(0, 60); save(); render(); });
+  $("childName").addEventListener("input", e => { state.childName = e.target.value.slice(0, MAX_NAMES); save(); render(); });
+  $("childName").addEventListener("change", e => { state.childName = normalizeKids(e.target.value); e.target.value = state.childName; save(); render(); });
 
   // Dad / Mom toggle (Settings) and first-run welcome
   function setRole(r) { state.role = r; save(); syncRoleButtons(); render(); }
@@ -590,7 +601,7 @@
   }
   document.querySelectorAll("#settingsDialog [data-role]").forEach(b => b.addEventListener("click", () => { setRole(b.dataset.role); flash(ROLE_TEXT[role()].label + " mode on."); }));
   document.querySelectorAll("#welcomeDialog [data-role]").forEach(b => b.addEventListener("click", () => {
-    state.childName = $("welcomeKids").value.trim().slice(0, 60);
+    state.childName = normalizeKids($("welcomeKids").value.slice(0, MAX_NAMES));
     setRole(b.dataset.role);
     $("welcomeDialog").close();
   }));

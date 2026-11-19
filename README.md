@@ -1,26 +1,39 @@
 # Daily Devotion
 
-A static daily devotional with two modes:
+A two-part daily Christian devotional. It's a static site (HTML, CSS, vanilla JS) with no build step, ready to drop onto Netlify.
 
-- **Personal**: a passage to read, a short reflection, two questions, a prayer and a private journal. It's a single scrolling page.
-- **Family**: full-screen slides meant to be cast to the TV. A title with a big picture, the story one short paragraph at a time, the weekly memory verse, two questions for your child, one for Mom & Dad, an activity, then prayer and notes. Written for a 5-year-old.
+- **My Study**: a personal devotional for a husband and father, in four steps:
+  1. **The Read** (observation): the NIV passage with tap-to-highlight verses, background notes, and a summary box
+  2. **The Reveal** (understanding): *God's Character & Grace* and *Human Nature & Warning* prompts
+  3. **The Reality Check**: how the truth meets your role as husband and father today, plus one concrete action
+  4. **The Response**: a written prayer, then **Complete Personal Study** (timestamped)
+- **Family Table**: the same passage as four tap-through cards for about 10–15 minutes with a 5-year-old:
+  1. **Big Idea** (2 min)
+  2. **Action Read** (4 min): key verses, a *Listening Word* and a big tap counter (with "How many were there?" reveal)
+  3. **Two Table Questions** (5 min): one for your 5-year-old (with an answer hint for parents), one for the whole family
+  4. **Repeat-After-Me Prayer** (2 min) + **Gratitude Check** → **Complete Family Devotional**
 
-Both modes use the **same passage each day**, so you can study it alone and then lead the family through it.
+Also included: daily streaks (📖 study, 🏡 family), a past-entries archive, night mode, optional per-card timers, full screen for casting to a TV (layouts fit landscape and portrait), Markdown journal export (download or copy), and JSON backup/restore.
 
-## Use it
-Open `index.html` in a browser, or host the folder on GitHub Pages so you can open it from any device. No build step, no server, no database.
-
-**On the TV:** cast the browser tab, switch to **Family**, and press the full-screen button (⛶). Move with **Next/Back**, the arrow keys or spacebar, or swipe on a touch screen. Text scales to the screen in both landscape and portrait.
-
-Set your child's name under **Settings & backup** so questions say "Your turn, ___!"
+## Deploy
+Netlify: point it at this repo (publish directory `.`; `netlify.toml` is included) or drag the folder into Netlify Drop. Locally, just open `index.html`.
 
 ## Storage
-Progress, notes, the current slide, mode, Bible version and your child's name are saved in `localStorage` in the browser. That means:
-- Clearing site data erases them. Use **Settings & backup → Export backup** now and then.
-- Data does not sync between devices or browsers.
+Everything is saved in the browser's `localStorage`. It does not sync between devices, and clearing site data erases it. Use **⚙️ → Export backup** regularly, and **Download/Copy Markdown** to move reflections into your notes.
 
-## Content
-- `content.js`: the shared plan (weeks, themes, memory verses, passages) and the personal devotionals.
-- `family.js`: the family slides, keyed by day. Rewrite this file as the kids grow. `content.js` doesn't need to change.
+## Content: `devotions-data.js`
+`devotionsData` is a plain array, one object per day. The app moves through it by date from the **plan start date** (⚙️ Settings) and starts over at the end. A day you've journaled stays pinned to the passage you used. To add a week, copy an entry, give it the next `id`, and fill it in:
 
-There are 14 days so far: Week 1 "Who Is Jesus?" and Week 2 "Trusting God When It's Hard". Passages link to BibleGateway in the version you choose. Memory verses are quoted from the World English Bible (public domain).
+| Field | Purpose |
+|---|---|
+| `title`, `reference` | Shown at the top of both tabs |
+| `passage` | `[{ ref: "2:20", text: "…" }]`: NIV text, word for word |
+| `personal.context / grace / warning / reality / prayerStarter` | Background and the step 2–4 prompts |
+| `family.bigIdea` | 1–2 sentences, faithful to the context, for a 5-year-old |
+| `family.keyVerses` | 2–4 refs from `passage` for the Action Read card |
+| `family.listeningWord`, `listenFor`, `listenAction`, `readTimes` | The listening game; the expected count is computed from `listenFor` |
+| `family.question1`, `question1Hint`, `question2` | Table questions |
+| `family.prayer` | 3–4 short repeat-after-me lines |
+
+### Scripture (NIV)
+All passage text in the starter week was checked word for word against the NIV on BibleGateway, including LORD in capitals where the NIV uses small caps. Biblica allows quoting up to 500 NIV verses without written permission, provided they aren't a complete book and are under 25% of the work's text, and the copyright notice (already in the footer) is shown. Keep that limit in mind as you add weeks to a public site.

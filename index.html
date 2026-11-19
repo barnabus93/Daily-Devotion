@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daily Devotion</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Daily Devotion</h1>
+    <div class="toggle" role="group" aria-label="Devotional mode">
+      <button type="button" data-mode="personal">Personal</button>
+      <button type="button" data-mode="family">Family</button>
+    </div>
+  </header>
+
+  <nav class="daynav" aria-label="Day navigation">
+    <button type="button" id="prev" aria-label="Previous day">&larr;</button>
+    <div class="daylabel">
+      <div id="dayTitle"></div>
+      <div id="weekTitle" class="muted"></div>
+    </div>
+    <button type="button" id="next" aria-label="Next day">&rarr;</button>
+  </nav>
+  <div id="dots" class="dots" aria-label="Plan progress"></div>
+
+  <main id="devotion" class="card"></main>
+
+  <footer class="settings">
+    <details>
+      <summary>Settings &amp; backup</summary>
+      <label>Bible version for this mode
+        <select id="version">
+          <option>ESV</option><option>NIV</option><option>NLT</option>
+          <option>CSB</option><option>NKJV</option><option>NIrV</option><option>ICB</option>
+        </select>
+      </label>
+      <p class="muted">Everything is saved only in this browser. Clearing site data erases it, and it does not sync between devices. Export a backup now and then.</p>
+      <div class="row">
+        <button type="button" id="export">Export backup</button>
+        <label class="filebtn">Import backup<input type="file" id="import" accept="application/json"></label>
+        <button type="button" id="reset" class="danger">Reset all</button>
+      </div>
+    </details>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
